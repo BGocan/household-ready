@@ -23,7 +23,7 @@ export const items = [
 export function defaultTarget(id,s){const pd=s.people*s.days;return id==='water'?pd*3:['food','child','pet'].includes(id)?s.days:['protein','veg'].includes(id)?pd:id==='fruit'?Math.ceil(pd/3):id==='carbs'?s.people:id==='snacks'?s.people*2:['bank','torch','warmth'].includes(id)?s.people:id==='batteries'?8*s.people:['hygiene','toilet'].includes(id)?Math.max(1,s.people):1;}
 export function target(id,s){return s.targets?.[id]??defaultTarget(id,s);}
 export function deficit(id,s){return Math.max(0,target(id,s)-(s.quantities[id]||0));}
-export function activeItems(s){return items.filter(([id])=>(id!=='child'||s.children)&&(id!=='pet'||s.pets));}
+export function activeItems(s){return items.filter(([id])=>id!=='food'&&(id!=='child'||s.children)&&(id!=='pet'||s.pets));}
 export function coverage(s){return (s.quantities.water||0)/(s.people*3);}
 export function validate(v){
  if(!v||v.version!==1||!Number.isInteger(v.people)||v.people<1||v.people>30||!Number.isInteger(v.days)||v.days<1||v.days>14)throw Error('This is not a supported household backup.');
@@ -33,3 +33,5 @@ export function validate(v){
  for(const id of ['contacts','cash','documents','medication','support'])out.checked[id]=!!v.checked?.[id];
  return out;
 }
+
+export function foodProgress(s){const ids=['protein','veg','fruit','carbs','snacks'].filter(id=>target(id,s)>0);if(!ids.length)return null;return Math.round(ids.reduce((sum,id)=>sum+Math.min(1,(s.quantities[id]||0)/target(id,s)),0)/ids.length*100);}

@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {initial,target,coverage,validate,activeItems,deficit} from '../public/core.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {initial,target,coverage,validate,activeItems,deficit,foodProgress} from '../public/core.mjs';
 test('water scales by household and duration',()=>{const s={...initial(),people:3,days:3};assert.equal(target('water',s),27);s.quantities.water=18;assert.equal(coverage(s),2);});
 test('unrelated supplies cannot increase drinking water coverage',()=>{const s=initial();s.quantities.bank=10000;assert.equal(coverage(s),0);});
 test('family items only appear when selected',()=>{const s=initial();assert.ok(!activeItems(s).some(x=>x[0]==='child'||x[0]==='pet'));s.children=true;s.pets=true;assert.ok(activeItems(s).some(x=>x[0]==='child'));assert.ok(activeItems(s).some(x=>x[0]==='pet'));});
@@ -7,3 +7,6 @@ test('rejects unsupported versions and invalid household sizes',()=>{for(const v
 
 test('custom targets survive restore and deficits never become negative',()=>{const s=initial();s.targets.protein=9;s.quantities.protein=6;assert.equal(deficit('protein',s),3);assert.equal(validate(s).targets.protein,9);s.quantities.protein=12;assert.equal(deficit('protein',s),0);s.targets.protein=0;assert.equal(deficit('protein',s),0);});
 test('old backups gain target support and preserve existing quantities',()=>{const s=initial();delete s.targets;s.quantities.water=18;const v=validate(s);assert.deepEqual(v.targets,{});assert.equal(v.quantities.water,18);});
+
+test('food stock reflects saved inventory and caps excess stock per category',()=>{const s=initial();s.people=3;Object.assign(s.quantities,{protein:6,veg:5,fruit:0,carbs:6,snacks:5});assert.equal(foodProgress(s),61);s.quantities.carbs=1000;assert.equal(foodProgress(s),61);s.targets.fruit=0;assert.equal(foodProgress(s),76);});
+test('food progress excludes disabled targets and old manual food days',()=>{const s=initial();s.quantities.food=10;assert.equal(foodProgress(s),0);for(const id of ['protein','veg','fruit','carbs','snacks'])s.targets[id]=0;assert.equal(foodProgress(s),null);});
