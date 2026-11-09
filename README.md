@@ -45,3 +45,9 @@ No tracking, authentication, remote personal-data storage or external fonts. Pla
 ## Attribution
 
 Official advice is attributed to original URLs and captured timestamps. GOV.UK content is under the Open Government Licence v3.0 except where otherwise stated. Application source has no open-source licence assigned yet.
+
+## Inventory and companion update
+
+The inventory now lists individual food, power, communication, hygiene and warmth supplies with editable targets, deficits, search and a downloadable shopping list. Optional family and pet rows follow household settings. Existing version-1 backups retain recorded quantities; custom targets are included in backups. Suggested non-water quantities are planning examples, not official requirements.
+
+The offline companion uses a conversation panel with household context. It can propose additions or set totals for recognised inventory items; confirmation is required to save. It is rule-based and does not provide a live LLM service. Unknown requests are identified rather than answered as though understood. Chat history is session-only.
