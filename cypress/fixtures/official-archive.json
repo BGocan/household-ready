@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "sources": [{
+    "id": "test-guidance",
+    "title": "Test fixture: household guidance",
+    "url": "https://www.gov.uk/test-fixture-only",
+    "lastSuccessfulCheckAt": "2026-11-09T12:00:00.000Z",
+    "lastAttemptAt": "2026-11-09T12:00:00.000Z",
+    "error": null,
+    "versions": [{
+      "hash": "test-version",
+      "savedAt": "2026-11-09T12:00:00.000Z",
+      "publishedAt": null,
+      "sourceUpdatedAt": null,
+      "text": "This is synthetic test guidance. It is not real emergency advice."
+    }]
+  }]
+}

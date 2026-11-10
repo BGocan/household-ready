@@ -1,3 +1,6 @@
 dist/
 node_modules/
 .vercel/
+cypress/downloads/
+cypress/screenshots/
+cypress/videos/

@@ -51,3 +51,7 @@ Official advice is attributed to original URLs and captured timestamps. GOV.UK c
 The inventory now lists individual food, power, communication, hygiene and warmth supplies with editable targets, deficits, search and a downloadable shopping list. Optional family and pet rows follow household settings. Existing version-1 backups retain recorded quantities; custom targets are included in backups. Suggested non-water quantities are planning examples, not official requirements.
 
 The offline companion uses a conversation panel with household context. It can propose additions or set totals for recognised inventory items; confirmation is required to save. It is rule-based and does not provide a live LLM service. Unknown requests are identified rather than answered as though understood. Chat history is session-only.
+
+## Browser tests and learning Cypress
+
+Run `npm ci`, then `npm run test:e2e:open` to watch the browser tests, or `npm run test:e2e` for a headless run. Each command starts and stops a local test server on port 4174. See [CYPRESS_LEARNING.md](CYPRESS_LEARNING.md) for the guided lesson and worked solution. Logic tests stay available with `npm test`; both suites run in GitHub Actions. Vercel skips downloading the Cypress executable during production installs.

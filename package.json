@@ -7,9 +7,15 @@
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "updates": "python3 scripts/archive_updates.py",
-    "dev": "node scripts/dev.mjs"
+    "dev": "node scripts/dev.mjs",
+    "test:e2e": "node scripts/run-cypress.mjs",
+    "test:e2e:open": "node scripts/run-cypress.mjs --open",
+    "test:all": "npm test && npm run test:e2e"
   },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "cypress": "16.2.1"
   }
 }
